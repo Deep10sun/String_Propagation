@@ -47,56 +47,60 @@ public class myFrame extends JFrame implements MouseMotionListener,Runnable,Mous
     public void draw(string g, int i){
         Graphics2D g2d = (Graphics2D)getGraphics();
         g2d.setColor(Color.BLACK);
-        double[] cords = {g.x[i-1],g.y2[i-1]};
-        double[] cords2 = {g.x[i],g.y2[i]};
+        double[] cords = {g.x[i-1],g.y0[i-1]};
+        double[] cords2 = {g.x[i],g.y0[i]};
         str_can(cords2);
         str_can(cords);
         Stroke sk = new BasicStroke(2f,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
         g2d.setStroke(sk);
         g2d.drawLine((int)cords[0],(int)cords[1],(int)cords2[0],(int)cords2[1]);
     }
+    public void reset(){
+        
+    }
     public void run() {
         while(true){
-            s.move();
+            for(int i = 0; i < 5; i++){
+                s.move();
+            }
             s.drew();
-            repaint();
+            Graphics2D g2d = (Graphics2D)getGraphics();
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0,0,600,600);
             try{
-                Thread.sleep(6);
+                Thread.sleep(15);
             }
             catch(InterruptedException ie){
                 System.out.println(ie.getMessage());
             }
+           
         }
     }
     public void mouseClicked(MouseEvent e){
         double[] coords = {e.getX(),e.getY()};
-        
-        if(coords[1] >= 200 && coords[1] <= 600){
-            can_str(coords);
-            x = Math.floor(coords[0]*1000)/1000;
-            int index = Math.abs(Arrays.binarySearch(s.x,x));
-            s.y2[index] = coords[1];
-        }
-    }
-    public void mousePressed(MouseEvent e){
-        double[] coords = {e.getX(),e.getY()};
-        if(coords[1] >= 250 && coords[1] <= 550){
             can_str(coords);
             x = Math.floor(coords[0]*1000)/1000;
             int index = Math.abs(Arrays.binarySearch(s.x,x));
             s.y1[index] = coords[1];
-        }
+    }
+    public void mousePressed(MouseEvent e){
+        double[] coords = {e.getX(),e.getY()};
+            can_str(coords);
+            x = Math.floor(coords[0]*1000)/1000;
+            int index = Math.abs(Arrays.binarySearch(s.x,x));
+            s.y1[index] = coords[1];
+        
     }
     public void mouseReleased(MouseEvent e){
     }
     public void mouseDragged(MouseEvent e){
-        // double[] coords = {e.getX(),e.getY()};
-        // if(coords[1] >= 250 && coords[1] <= 550){
-        //     can_str(coords);
-        //     x = Math.floor(coords[0]*100)/100;
-        //     int index = Math.abs(Arrays.binarySearch(s.x,x));
-        //     s.y1[index] = coords[1];
-        // }
+        double[] coords = {e.getX(),e.getY()};
+        if(coords[1] >= 250 && coords[1] <= 550){
+            can_str(coords);
+            x = Math.floor(coords[0]*100)/100;
+            int index = Math.abs(Arrays.binarySearch(s.x,x));
+            s.y1[index] = coords[1];
+        }
     }
     public void mouseMoved(MouseEvent e){
     }

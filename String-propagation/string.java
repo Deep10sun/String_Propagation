@@ -23,10 +23,7 @@ public class string {
         y1 = Arrays.copyOf(y0,y0.length);
         y2 = Arrays.copyOf(y1,y1.length);
         xdiff = (x[1] - x[0]);
-        y2[0] = y1[0];
-        y2[1] = y1[1];
-        y2[num-2] = y1[num-2];
-        y2[num-1] = y1[num-1];
+        
         
     }
     public void setFrame(myFrame test){
@@ -37,6 +34,10 @@ public class string {
         return (Math.pow((1/Math.pow(speed*tdiff,2))+(gamma/(2*tdiff)),-1))*((1/Math.pow(xdiff,2))*(y1[i+1]-2*y1[i]+y1[i-1])-(1/Math.pow(speed*tdiff,2))*(y0[i]-2*y1[i])+(gamma/2*tdiff)*(y0[i])-(Math.pow(stress,2)/Math.pow(xdiff,4))*(y1[i-2]-4*y1[i-1]+6*y1[i]-4*y1[i+1]+y1[i+2]));
     }
     public void move(){
+        y2[0] = y1[0];
+        y2[1] = y1[1];
+        y2[num-2] = y1[num-2];
+        y2[num-1] = y1[num-1];
             for(int i = 2; i < y1.length-2;i+=1){
                 y2[i] = update(i,this.y0,this.y1,this.gamma,this.stress,this.xdiff,this.tdiff,this.speed);
             }
